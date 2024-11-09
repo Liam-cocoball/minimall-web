@@ -1,2 +1,42 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+body {
+    background-color: #F5F6FA;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ion-button {
+    --background: #6815ec;
+}
+
+ion-input {
+    --ion-color-step-550: #6815ec;
+    --ion-color-step-50: #ffffff;
+    --border-color: #ffffff;
+}
+
+.loading {
+    text-align: center;
+    font-size: 15px;
+}
+
+.unifiedColor {
+    color: #6815ec;
+}
+
+ion-card-subtitle {
+    color: black;
+}
+
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}

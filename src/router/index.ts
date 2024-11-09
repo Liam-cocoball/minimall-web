@@ -5,17 +5,32 @@ import HomeOrder from '@/views/HomeOrder.vue';
 import HomeHelp from '@/views/HomeHelp.vue';
 import MyLogin from '@/views/MyLogin.vue';
 import MyRegister from '@/views/MyRegister.vue';
-
+import MyCenter from '@/views/MyCenter.vue';
+import GoodsDetails from '@/views/GoodsDetails.vue';
+import HomeGoods from '@/views/HomeGoods.vue';
+import GoodsList from '@/views/GoodsList.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home/homeGoods'
   },
   {
     path: '/home',
     name: 'Home',
     component: HomeIndex,
+    children: [
+      {
+        path: 'homeGoods',
+        name: 'HomeGoods',
+        component: HomeGoods,
+      },
+      {
+        path: 'goodslist/:id',
+        name: 'GoodsList',
+        component: GoodsList,
+      }
+    ]
   },
   {
     path: '/order',
@@ -37,7 +52,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Register',
     component: MyRegister,
   },
-  
+  {
+    path: '/mycenter',
+    name: 'MyCenter',
+    component: MyCenter,
+  },
+  {
+    path: '/goodsdetails/:id',
+    name: 'GoodsDetails',
+    component: GoodsDetails,
+  }
 ]
 
 const router = createRouter({

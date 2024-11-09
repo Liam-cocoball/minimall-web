@@ -5,10 +5,11 @@
     <HorseRaceLamp></HorseRaceLamp>
     <!-- 宫格 -->
     <HomeBanner></HomeBanner>
-    <!-- 商品 -->
-    <HomeGoods></HomeGoods>
     <!-- 版权信息 -->
     <HomeFooter />
+
+    
+   
 </template>
 
 <script setup lang="ts">
@@ -17,7 +18,7 @@ import TopTip from './TopTip.vue'
 import HorseRaceLamp from './HorseRaceLamp.vue'
 import HomeFooter from './HomeFooter.vue';
 import HomeBanner from './HomeBanner.vue';
-import HomeGoods from './HomeGoods.vue';
+
 
 </script>
 

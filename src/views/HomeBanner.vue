@@ -1,97 +1,94 @@
 <template>
-  <ion-card>
+
+  <ion-card v-if="loading" class="loading">
+    数据加载中
+  </ion-card>
+  <ion-card v-else>
     <ion-card-content>
       <div class="banner">
-        <div class="item item1">
+        <div class="item item1" v-for="item in goodsType" :key="item.id" @click="goGoodsList(item.id)">
           <div>
-            <img src="../assets/1.png" alt="图片">
+            <ion-icon style="font-size: 38px;color: #b0a4e3;" :icon="item.imagesAddress"></ion-icon>
           </div>
-          <span>苹果账号</span>
+          <span style="font-size: 12px;">{{ item.name }}</span>
         </div>
-
-        <div class="item item1">
-          <div>
-            <img src="../assets/2.png" alt="图片">
-          </div>
-          <span>礼品卡</span>
-        </div>
-
-        <div class="item item1">
-          <div>
-            <img src="../assets/3.png" alt="图片">
-          </div>
-          <span>推特账号</span>
-        </div>
-
-        <div class="item item1">
-          <div>
-            <img src="../assets/4.png" alt="图片">
-          </div>
-          <span>谷歌账号</span>
-        </div>
-
-        <div class="item item1">
-          <div>
-            <img src="../assets/5.png" alt="图片">
-          </div>
-          <span>INS账号</span>
-        </div>
-
-        <div class="item item1">
-          <div>
-            <img src="../assets/6.png" alt="图片">
-          </div>
-          <span>Tiktok</span>
-        </div>
-        <div class="item item1">
-          <div>
-            <img src="../assets/7.png" alt="图片">
-          </div>
-          <span>脸书账号</span>
-        </div>
-        <div class="item item1">
-          <div>
-            <img src="../assets/8.png" alt="图片">
-          </div>
-          <span>Youtube</span>
-        </div>
-        <div class="item item1">
-          <div>
-            <img src="../assets/9.png" alt="图片">
-          </div>
-          <span>App下载</span>
-        </div>
-        <div class="item item1">
-          <div>
-            <img src="../assets/10.png" alt="图片">
-          </div>
-          <span>全部账号</span>
-        </div>
-
-        
       </div>
     </ion-card-content>
   </ion-card>
+
+  <router-view />
+
+
 </template>
 
 <script setup lang="ts">
-import { IonCard, IonCardContent } from '@ionic/vue';
+import { IonCard, IonCardContent, IonIcon } from '@ionic/vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios'
+import { RouterView, useRouter } from 'vue-router'
+
+const router = useRouter()
+
+
+const goodsType = ref([{
+  id: 0,
+  name: '',
+  imagesAddress: ''
+}])
+const loading = ref(true);
+router.push('/home/homeGoods')
+onMounted(async () => {
+
+  await axios({
+    method: 'get',
+    url: '/api/v1/goodsTypeList',
+  })
+    .then(function (response) {
+      goodsType.value = response.data.data
+      loading.value = false
+    },
+      (err) => {
+        alert(err)
+      }
+    );
+})
+
+function goGoodsList(id: number) {
+  router.push(`/home/goodslist/${id}`)
+}
 
 </script>
 
 <style scoped>
-.banner{
+/* img{
+  border: 1px solid #6815ec;
+  border-radius: 50%;
+} */
+.banner {
   display: flex;
   flex-wrap: wrap;
 }
-.item{
+
+.item {
   text-align: center;
   width: 20%;
 }
-.item:hover{
+
+.item:hover {
   cursor: pointer;
 }
-span{
+
+span {
   font-size: 12px;
+}
+
+ion-card {
+  margin-top: 12px;
+}
+
+.item1 {
+  /* border: 1px solid red; */
+  cursor: pointer;
+  padding: 0px 5px 0px 5px;
 }
 </style>

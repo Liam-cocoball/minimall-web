@@ -1,18 +1,18 @@
 <template>
    <ion-card>
       <ion-card-header>
-         <ion-card-title>查询订单</ion-card-title>
+         <ion-card-title class="unifiedColor">查询订单</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
          <div>
             <ion-input ref="input" type="email" fill="solid" label="邮箱/手机号" label-placement="floating"
-               helper-text="Enter a valid email/phone" error-text="Invalid email" @ionInput="validate('')"
+               helper-text="请输入有效的邮箱或电话" @ionInput="validate('')"
                @ionBlur="markTouched"></ion-input>
          </div>
          <div>
-            <ion-button expand="block" size="small">查询</ion-button>
-            <ion-button color="medium" size="small">重置</ion-button>
+            <ion-button expand="block" >查询</ion-button>
+            <ion-button size="small">重置</ion-button>
          </div>
          <div>
 

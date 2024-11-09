@@ -1,15 +1,15 @@
 <template>
   <ion-card v-if="loading" class="loading">
-    数据加载中...
+    数据加载中
   </ion-card>
-  <ion-card v-else v-for="(item, index) in goodsType" :key="index">
+  <ion-card>
     <ion-card-header class="header">
       <ion-card-subtitle>
-        <span><ion-icon :icon="item.imagesAddress"></ion-icon> {{ item.name }}</span>
+        <span> {{ goodsList.name }}</span>
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <div class="goods" @click="goodsDetails(goods.id)" v-for="(goods, i) in item.goodsAll" :key="i">
+      <div class="goods" @click="goodsDetails(goods.id)" v-for="(goods, index) in goodsList.goodsAll" :key="index">
         <div class="item left">
           <img :src="goods.images[0]" :alt="goods.name">
         </div>
@@ -23,23 +23,29 @@
           <div class="money">￥{{ goods.goodsInfoAll[0].couponPrice }}</div>
         </div>
       </div>
+
     </ion-card-content>
   </ion-card>
+
+
 </template>
+
 <script setup lang="ts">
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonIcon } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle } from '@ionic/vue';
 
+// import { logoApple } from 'ionicons/icons';
+import { onMounted, ref,watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
 
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router'
 import axios from 'axios'
 const loading = ref(true)
 const router = useRouter()
-const goodsType = ref([{
+const route = useRoute();
+
+const goodsList = ref({
   id: 0,
   name: '',
   title: '',
-  imagesAddress: '',
   goodsAll: [
     {
       "goodsTarg": [
@@ -65,24 +71,36 @@ const goodsType = ref([{
       "images": [],
       "details": ""
     }]
-}]
+}
 )
 
-
-onMounted(() => {
+function fetchGoodsData() {
+  const { id } = route.params;
   axios({
-    method: 'get',
-    url: '/api/v1/goodsList',
+    method: 'post',
+    url: '/api/v1/goodsTypeByGoods',
+    data: {
+      id
+    }
   })
     .then(function (response) {
-      goodsType.value = response.data.data
+      goodsList.value = response.data.data
       loading.value = false
     },
       (err) => {
         alert(err)
       }
-    );
+    )
+}
+
+onMounted(() => {
+  fetchGoodsData()
 })
+
+watch(() => route.params.id, () => {  
+  console.log('111') 
+  fetchGoodsData();  
+});  
 
 function goodsDetails(goodsid: number) {
   router.push({
@@ -103,7 +121,7 @@ ion-card-header {
 }
 
 ion-card-content {
-  padding: 5px;
+  padding-top: 5px;
   box-shadow: 0px -1px 1px 0px rgba(173, 170, 170, 0.5);
 }
 
@@ -111,13 +129,12 @@ ion-card-content {
   display: flex;
   /* border-radius: 5px; */
   box-shadow: 0px 1px 0px 0px rgba(173, 170, 170, 0.5);
-  /* border-bottom: 1px solid rebeccapurple; */
   align-items: center;
 
 }
 
 .item {
-  padding: 5px 0px 0px 0px;
+  padding: 5px 0px 5px 0px;
   font-size: 13px;
 }
 
@@ -127,12 +144,13 @@ ion-card-content {
 
 .left {
   width: 20%;
-  margin-left: 5px;
+  margin-left: 5px
 
 }
 
 .left img {
   border-radius: 10px;
+  width: 100px;
 }
 
 .right {
@@ -142,12 +160,7 @@ ion-card-content {
   flex-direction: column;
   justify-content: space-around;
 }
-.right div:nth-child(1){
-  font-size: 16px;
-}
-.right div:nth-child(2){
-  font-size: 12px;
-}
+
 .targ {
   display: flex;
   justify-content: space-between;
@@ -165,6 +178,6 @@ ion-card-content {
 
 .money {
   color: red;
-  font-size: 16px;
+  font-size: 15px;
 }
 </style>

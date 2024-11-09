@@ -1,7 +1,8 @@
 <template>
     <ion-card>
         <ion-card-content>
-            © 海外appleid_外区美国id香港id购买平台_美国苹果id - 保留所有解释权。
+            <div>Copyright @ 2024</div>
+            <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">滇ICP备19006675号</a>
         </ion-card-content>
     </ion-card>
 </template>
@@ -10,3 +11,11 @@
 import { IonCard, IonCardContent } from '@ionic/vue';
 
 </script>
+
+<style scoped>
+
+ion-card-content{
+    padding-top:5px;
+    text-align: center;
+}
+</style>
