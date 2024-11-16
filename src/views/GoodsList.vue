@@ -98,7 +98,6 @@ onMounted(() => {
 })
 
 watch(() => route.params.id, () => {  
-  console.log('111') 
   fetchGoodsData();  
 });  
 

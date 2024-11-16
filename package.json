@@ -23,6 +23,9 @@
     "date-fns": "^4.1.0",
     "element-plus": "^2.8.7",
     "ionicons": "^7.0.0",
+    "js-md5": "^0.8.3",
+    "md5": "^2.3.0",
+    "nanoid": "^5.0.8",
     "vue": "^3.3.0",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.2.0"
@@ -43,6 +46,7 @@
     "unplugin-vue-components": "^0.27.4",
     "vite": "~5.2.0",
     "vitest": "^0.34.6",
+    "vue-matomo": "^4.2.0",
     "vue-tsc": "^2.0.22"
   },
   "description": "An Ionic project"

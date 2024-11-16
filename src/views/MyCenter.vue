@@ -88,9 +88,9 @@ onMounted(() => {
 })
 // 修改密码数据
 const userpwd = reactive({
-    oldpassword: 'qwertyuiop',
-    newpassword: 'qwertyuiop',
-    oknewpassword: 'qwertyuiop',
+    oldpassword: '',
+    newpassword: '',
+    oknewpassword: '',
 })
 // 修改密码
 async function updatapwd() {

@@ -72,7 +72,7 @@
                     </div>
                     <div class="item payopt">
                         <span class="title">选择支付方式</span>
-                        <ion-radio-group value="wx">
+                        <ion-radio-group v-model="currentPlay">
                             <ion-radio value="wx" class="payFunction">
                                 <!-- <ion-icon :icon="logoWechat"></ion-icon> -->
                                 <svg class="icon" aria-hidden="true">
@@ -106,6 +106,12 @@
                                 ￥{{ currentGoods.price }}
                             </span>
                         </div>
+                        <div class="emailoderinput">
+                            <ion-input type="email" fill="solid" v-model="emailorder" label="邮箱:"
+                                label-placement="floating" helper-text="请输入有效邮箱↑">
+                            </ion-input>
+                            <p>游客购买后，查询订单信息需要用到 电子邮箱 。登录用户无需填写此项</p>
+                        </div>
                         <ion-button expand="block" size="small" @click="play">
                             <span>立即购买</span>
                             <!-- <ion-icon slot="icon-only" :ios="logoApple" :md="settingsSharp"></ion-icon> -->
@@ -130,14 +136,12 @@
 
 </template>
 <script setup lang="ts">
-
 import { ElMessage } from 'element-plus'
-
-import { IonCard, IonCardContent, IonCardHeader, IonRadio, IonRadioGroup, IonButton } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonRadio, IonRadioGroup, IonButton, IonInput } from '@ionic/vue';
 import axios from 'axios';
-import { onMounted, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router'
-
+import { onBeforeMount, reactive, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 const route = useRoute();
 // 是否加载
 const loading = ref(false);
@@ -205,23 +209,25 @@ const goodsDetails = ref({
 })
 // 当前选择的商品
 let currentGoods = reactive({
-    "id": 0,
-    "goodsId": 0,
-    "specsInfoIds": "",
-    "state": 0,
-    "inventory": 0,
-    "price": 0,
-    "couponPrice": 0,
-    "recommend": 0,
+    id: 0,
+    goodsId: 0,
+    specsInfoIds: "",
+    state: 0,
+    inventory: 0,
+    price: 0,
+    couponPrice: 0,
+    recommend: 0,
     goodsSpecsInfoAll: [
         {
-            "id": 0,
-            "goodsSpecs": 0,
-            "value": "",
-            "order": 1
+            id: 0,
+            goodsSpecs: 0,
+            value: "",
+            order: 1
         }
     ]
 })
+const emailorder = ref('')
+const currentPlay = ref('wx')
 
 // 得到当前用户选择的sku并且修改sku
 async function getSku(sku: any) {
@@ -254,10 +260,9 @@ async function getSku(sku: any) {
 const userinfo = ref({
     money: 0
 })
-
 // 加载数据
-onMounted(async () => {
-    const { id } = route.params;
+onBeforeMount(async () => {
+    const { id } = route.params
     loading.value = true
     await axios({
         method: 'post',
@@ -282,12 +287,43 @@ onMounted(async () => {
 
 })
 // 支付
-function play() {
+async function play() {
+    console.log(currentGoods)
     if (currentGoods.inventory <= 0) {
-        ElMessage.warning('商品太火爆了,暂时无法购买');
+        ElMessage.warning('商品太火爆了,暂时无法购买')
         return
     }
-    ElMessage.success('支付')
+    if (currentPlay.value === '') {
+        ElMessage.error('请选择支付方式')
+        return
+    }
+    if (currentPlay.value === 'zfb' || currentPlay.value === 'ye') {
+        ElMessage.success('目前仅支持微信支付')
+        return
+    }
+    const data = {
+        email: emailorder.value,
+        goodsId: currentGoods.id,
+        playFunc: 1,
+        count: goodsNumber.value
+    }
+    await axios({
+        method: 'post',
+        url: '/api/v1/createOrder',
+        data
+    }).then(
+        (res) => {
+            console.log(res.data)
+            if (res.data.code === 200) {
+                router.push({ path: `/playDetails/${res.data.data.orderNumber}` })
+            } else {
+                ElMessage.error(res.data)
+            }
+        },
+        (err) => {
+            console.log(err)
+        }
+    )
 }
 
 // 判断购买数量不能大于库存和最小值
@@ -306,6 +342,11 @@ function operateNumber(operate: number) {
         }
     }
 }
+
+
+
+
+
 </script>
 
 
@@ -485,5 +526,13 @@ ion-radio.ios::part(container) {
 
 :deep(.slick-slide) {
     background: none;
+}
+
+ion-input {
+    --ion-color-step-50: #f2f2f2;
+}
+
+.emailoderinput {
+    border-top: 1px solid #6815ec;
 }
 </style>

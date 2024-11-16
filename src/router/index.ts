@@ -9,6 +9,7 @@ import MyCenter from '@/views/MyCenter.vue';
 import GoodsDetails from '@/views/GoodsDetails.vue';
 import HomeGoods from '@/views/HomeGoods.vue';
 import GoodsList from '@/views/GoodsList.vue';
+import PlayDetails from '@/views/PlayDetails.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -61,6 +62,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/goodsdetails/:id',
     name: 'GoodsDetails',
     component: GoodsDetails,
+  },
+  {
+    path: '/playDetails/:orderNumber',
+    name: 'PlayDetails',
+    component: PlayDetails,
   }
 ]
 

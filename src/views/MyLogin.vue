@@ -43,8 +43,8 @@ import { useRouter } from 'vue-router'
 
 // 收集登录数据
 const user = reactive({
-    account: 'cocoball',
-    password: 'qwertyuiop'
+    account: '',
+    password: ''
 })
 // 页面消息提示
 const userTip = reactive({

@@ -28,7 +28,7 @@
                     <ion-input ref="input" type="email" v-model="registerUser.email" fill="solid" label="邮箱: "
                         label-placement="floating" placeholder="邮箱" :helper-text="registerUserTip.email"></ion-input>
                 </ion-item>
-                <ion-button expand="block" @click="register">登录</ion-button>
+                <ion-button expand="block" @click="register">注册</ion-button>
             </ion-list>
         </ion-card-content>
     </ion-card>
