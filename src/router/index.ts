@@ -12,10 +12,6 @@ import GoodsList from '@/views/GoodsList.vue';
 import PlayDetails from '@/views/PlayDetails.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  // {
-  //   path: '/',
-  //   redirect: '/home/home-goods'
-  // },
   {
     path: '/',
     name: 'Home',
