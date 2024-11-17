@@ -1,6 +1,6 @@
 <template>
-  <ion-card v-if="loading" class="loading">
-    数据加载中...
+  <ion-card v-if="loading" class="loading"  style="text-align: center;">
+    数据加载中
   </ion-card>
   <ion-card v-else v-for="(item, index) in goodsType" :key="index">
     <ion-card-header class="header">
@@ -70,6 +70,7 @@ const goodsType = ref([{
 
 
 onMounted(() => {
+  
   axios({
     method: 'get',
     url: '/api/v1/goodsList',
@@ -86,7 +87,7 @@ onMounted(() => {
 
 function goodsDetails(goodsid: number) {
   router.push({
-    path: `/goodsDetails/${goodsid}`
+    path: `/goods-details/${goodsid}`
   })
 
 }

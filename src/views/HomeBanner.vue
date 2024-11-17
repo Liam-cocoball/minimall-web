@@ -1,6 +1,6 @@
 <template>
 
-  <ion-card v-if="loading" class="loading">
+  <ion-card v-if="loading" class="loading"  style="text-align: center;">
     数据加载中
   </ion-card>
   <ion-card v-else>
@@ -36,7 +36,7 @@ const goodsType = ref([{
   imagesAddress: ''
 }])
 const loading = ref(true);
-router.push('/home/homeGoods')
+router.push('/home-goods')
 onMounted(async () => {
 
   await axios({
@@ -54,7 +54,7 @@ onMounted(async () => {
 })
 
 function goGoodsList(id: number) {
-  router.push(`/home/goodslist/${id}`)
+  router.push(`/home/goods-list/${id}`)
 }
 
 </script>

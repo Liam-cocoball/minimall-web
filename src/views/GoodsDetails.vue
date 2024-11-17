@@ -1,5 +1,5 @@
 <template>
-    <ion-card v-if="loading" class="loading">
+    <ion-card v-if="loading" class="loading" style="text-align: center;">
         数据加载中
     </ion-card>
     <div v-else>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div style="margin-left: 20px;">
-                            <span> 库存：{{ currentGoods.inventory }}</span>
+                            <span> 库存：{{ inventory }}</span>
                         </div>
                     </div>
                     <!-- 商品规格 -->
@@ -108,7 +108,7 @@
                         </div>
                         <div class="emailoderinput">
                             <ion-input type="email" fill="solid" v-model="emailorder" label="邮箱:"
-                                label-placement="floating" helper-text="请输入有效邮箱↑">
+                                label-placement="floating" :helper-text="emailtip">
                             </ion-input>
                             <p>游客购买后，查询订单信息需要用到 电子邮箱 。登录用户无需填写此项</p>
                         </div>
@@ -139,7 +139,7 @@
 import { ElMessage } from 'element-plus'
 import { IonCard, IonCardContent, IonCardHeader, IonRadio, IonRadioGroup, IonButton, IonInput } from '@ionic/vue';
 import axios from 'axios';
-import { onBeforeMount, reactive, ref } from 'vue';
+import { onBeforeMount, reactive, ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute();
@@ -147,6 +147,8 @@ const route = useRoute();
 const loading = ref(false);
 // 购买数量
 const goodsNumber = ref(1)
+
+const emailtip = ref(' ')
 // 商品详情
 const goodsDetails = ref({
     specsAll: [
@@ -229,6 +231,11 @@ let currentGoods = reactive({
 const emailorder = ref('')
 const currentPlay = ref('wx')
 
+const inventory = computed(() => {
+    return currentGoods.inventory >= 1 ? '有货' : '无货'
+})
+
+
 // 得到当前用户选择的sku并且修改sku
 async function getSku(sku: any) {
     for (let i = 0; i < currentGoods.goodsSpecsInfoAll.length; i++) {
@@ -293,6 +300,10 @@ async function play() {
         ElMessage.warning('商品太火爆了,暂时无法购买')
         return
     }
+    if (goodsNumber.value >= 10){
+        ElMessage.warning('超过最大购买数量')
+        return
+    }
     if (currentPlay.value === '') {
         ElMessage.error('请选择支付方式')
         return
@@ -315,9 +326,12 @@ async function play() {
         (res) => {
             console.log(res.data)
             if (res.data.code === 200) {
-                router.push({ path: `/playDetails/${res.data.data.orderNumber}` })
+                router.push({ path: `/play-details/${res.data.data.orderNumber}` })
             } else {
-                ElMessage.error(res.data)
+                if (res.data.code === 501) {
+                    emailtip.value = res.data.data[0].msg
+                    ElMessage.error(emailtip.value)
+                }
             }
         },
         (err) => {
@@ -396,7 +410,7 @@ ion-card-content {
 
 .goodsNumber {
     padding: 10px 0px 10px 0px;
-    border-bottom: 1px solid #6815ec;
+
 }
 
 .goodsNumber,
@@ -435,11 +449,7 @@ ion-card-content {
 .goodsinfo {
     padding: 10px 0px 10px 20px;
     font-size: 20px;
-    border-bottom: 1px solid #6815ec;
-}
 
-.payopt {
-    border-bottom: 1px solid #6815ec;
 }
 
 /* 规格样式 */

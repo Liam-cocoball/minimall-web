@@ -60,7 +60,7 @@ const loading = ref(false)
 onMounted(() => {
     // 有token 去 个人中心
     if (localStorage.getItem('token') !== null) {
-        router.push('/mycenter')
+        router.push('/my-center')
     }
 })
 onBeforeUnmount(() => {
@@ -111,7 +111,7 @@ async function Login() {
                 grouping: true,
                 type: 'success',
             })
-            router.push('/mycenter')
+            router.push('/my-center')
         },
         (err) => {
             ElMessage.error(err)

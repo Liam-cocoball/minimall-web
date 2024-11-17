@@ -36,7 +36,7 @@ function cleartip() {
     }
 }
 function goHome(index: number) {
-    router.push('/home/homeGoods')
+    router.push('/')
     cleartip()
     tip.value[index] = 'unifiedColor'
 }
@@ -66,7 +66,7 @@ function goLogin(index: number) {
     tip.value[index] = 'unifiedColor'
 }
 function goCenter(index: number) {
-    router.push('/mycenter')
+    router.push('/my-center')
     cleartip()
     tip.value[index] = 'unifiedColor'
 }

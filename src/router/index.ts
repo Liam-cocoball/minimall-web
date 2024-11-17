@@ -12,22 +12,22 @@ import GoodsList from '@/views/GoodsList.vue';
 import PlayDetails from '@/views/PlayDetails.vue';
 
 const routes: Array<RouteRecordRaw> = [
+  // {
+  //   path: '/',
+  //   redirect: '/home/home-goods'
+  // },
   {
     path: '/',
-    redirect: '/home/homeGoods'
-  },
-  {
-    path: '/home',
     name: 'Home',
     component: HomeIndex,
     children: [
       {
-        path: 'homeGoods',
+        path: 'home-goods',
         name: 'HomeGoods',
         component: HomeGoods,
       },
       {
-        path: 'goodslist/:id',
+        path: 'goods-list/:id',
         name: 'GoodsList',
         component: GoodsList,
       }
@@ -54,17 +54,17 @@ const routes: Array<RouteRecordRaw> = [
     component: MyRegister,
   },
   {
-    path: '/mycenter',
+    path: '/my-center',
     name: 'MyCenter',
     component: MyCenter,
   },
   {
-    path: '/goodsdetails/:id',
+    path: '/goods-details/:id',
     name: 'GoodsDetails',
     component: GoodsDetails,
   },
   {
-    path: '/playDetails/:orderNumber',
+    path: '/play-details/:orderNumber',
     name: 'PlayDetails',
     component: PlayDetails,
   }

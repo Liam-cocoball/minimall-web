@@ -1,5 +1,5 @@
 <template>
-  <ion-card v-if="loading" class="loading">
+  <ion-card v-if="loading" class="loading"  style="text-align: center;">
     数据加载中
   </ion-card>
   <ion-card>
@@ -103,7 +103,7 @@ watch(() => route.params.id, () => {
 
 function goodsDetails(goodsid: number) {
   router.push({
-    path: `/goodsDetails/${goodsid}`
+    path: `/goods-details/${goodsid}`
   })
 
 }

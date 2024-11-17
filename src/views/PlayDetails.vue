@@ -121,7 +121,7 @@ onBeforeMount(async () => {
     const { orderNumber } = route.params
     // 订单号不对，返回首页
     if (orderNumber === undefined || orderNumber === null || orderNumber === '') {
-        router.push('/home/homeGoods')
+        router.push('/home/home-goods')
     }
     // 查询订单
     getOrder(orderNumber)
@@ -139,7 +139,7 @@ async function getOrder(orderNumber: any) {
         (res) => {
             if(res.data.code === 500){
                 ElMessage.error(res.data.msg)
-                router.push('/home/homeGoods')
+                router.push('/home/home-goods')
                 return
             }
             if (orderdata.value.state !== res.data.data.state) {
@@ -149,14 +149,14 @@ async function getOrder(orderNumber: any) {
                     ElMessage.success('付款成功')
                     ordertip.value = 'ordertipgreen'
                     setTimeout(() => {
-                        router.push('/home/homeGoods')
+                        router.push('/home/home-goods')
                     }, 3000)
                 }
             }
         },
         (err) => {
             ElMessage.error(err)
-            router.push('/home/homeGoods')
+            router.push('/home/home-goods')
         }
     )
 }
