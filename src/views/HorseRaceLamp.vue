@@ -20,6 +20,7 @@
 import { IonCard } from '@ionic/vue';
 import { onMounted, onUnmounted, ref } from 'vue';
 
+
 let timer: string | number | NodeJS.Timeout | null | undefined = null
 
 const styleLeft = ref(0)

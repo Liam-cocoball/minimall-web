@@ -117,7 +117,7 @@
                             <!-- <ion-icon slot="icon-only" :ios="logoApple" :md="settingsSharp"></ion-icon> -->
                         </ion-button>
                         <div class="tip" style="text-align: center;margin-top: 10px;">
-                            <span>遇到任何问题，请及时联系网站客服：cocoball</span>
+                            <span>遇到任何问题，请及时联系网站客服：cocoball-vip</span>
                         </div>
                     </div>
                 </div>
@@ -300,7 +300,7 @@ async function play() {
         ElMessage.warning('商品太火爆了,暂时无法购买')
         return
     }
-    if (goodsNumber.value >= 10){
+    if (goodsNumber.value >= 10) {
         ElMessage.warning('超过最大购买数量')
         return
     }
@@ -312,11 +312,14 @@ async function play() {
         ElMessage.success('目前仅支持微信支付')
         return
     }
+    const skuid: number[] = []
+    currentGoods.goodsSpecsInfoAll.forEach(item => { skuid.push(item.id) })
     const data = {
         email: emailorder.value,
         goodsId: currentGoods.id,
         playFunc: 1,
-        count: goodsNumber.value
+        count: goodsNumber.value,
+        skuid,
     }
     await axios({
         method: 'post',

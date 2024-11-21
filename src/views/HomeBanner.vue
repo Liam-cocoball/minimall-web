@@ -26,10 +26,7 @@ import { IonCard, IonCardContent, IonIcon } from '@ionic/vue';
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
 import { RouterView, useRouter } from 'vue-router'
-
 const router = useRouter()
-
-
 const goodsType = ref([{
   id: 0,
   name: '',
@@ -38,7 +35,6 @@ const goodsType = ref([{
 const loading = ref(true);
 router.push('/home-goods')
 onMounted(async () => {
-
   await axios({
     method: 'get',
     url: '/api/v1/goodsTypeList',

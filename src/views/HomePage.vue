@@ -79,7 +79,7 @@ function goCenter(index: number) {
         <ion-menu content-id="main-content">
             <ion-header>
                 <ion-toolbar>
-                    <ion-title>cocoball</ion-title>
+                    <ion-title>cocoball-vip</ion-title>
                 </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">

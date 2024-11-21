@@ -1,12 +1,10 @@
 <template>
     <ion-card>
       <ion-card-content>
-        <strong>24小时全天自动发货</strong>
-        <br>
-        <strong>自助下单平台，需要什么选择对应得标题进行购买付款，付款完毕后返回网页就会显示账号密码信息得。</strong>
+        <strong>自助下单平台，需要什么选择对应得商品进行购买付款，付款完毕后系统会在15分钟内将相关资料发送至邮箱。</strong>
       </ion-card-content>
       <ion-card-header>
-        <ion-card-title> 🚀没找到你想要的可以联系客服，什么类型的都有哦</ion-card-title>
+        <ion-card-title> 🚀没找到你想要的可以联系客服，什么类型的都有哦！wx：cocoball-vip</ion-card-title>
       </ion-card-header>
   
       <!-- <ion-button fill="clear">Action 1</ion-button>

@@ -1,5 +1,5 @@
 <template>
-  <ion-card v-if="loading" class="loading"  style="text-align: center;">
+  <ion-card v-if="loading" class="loading" style="text-align: center;">
     数据加载中
   </ion-card>
   <ion-card v-else v-for="(item, index) in goodsType" :key="index">
@@ -70,7 +70,6 @@ const goodsType = ref([{
 
 
 onMounted(() => {
-  
   axios({
     method: 'get',
     url: '/api/v1/goodsList',
@@ -143,12 +142,15 @@ ion-card-content {
   flex-direction: column;
   justify-content: space-around;
 }
-.right div:nth-child(1){
+
+.right div:nth-child(1) {
   font-size: 16px;
 }
-.right div:nth-child(2){
+
+.right div:nth-child(2) {
   font-size: 12px;
 }
+
 .targ {
   display: flex;
   justify-content: space-between;

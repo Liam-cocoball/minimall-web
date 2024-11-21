@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
-import  ElementPlus  from 'element-plus';
+import ElementPlus from 'element-plus';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -39,7 +39,6 @@ import '@ionic/vue/css/palettes/dark.system.css';
 import './theme/variables.css';
 
 import 'element-plus/dist/index.css'
-
 
 
 const app = createApp(App)
