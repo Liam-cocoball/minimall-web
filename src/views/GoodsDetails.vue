@@ -87,12 +87,6 @@
                                 </svg>
                                 <span>支付宝</span>
                             </ion-radio>
-                            <ion-radio value="ye" class="payFunction">
-                                <!-- <ion-icon :icon="walletOutline"></ion-icon> -->
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-yibaoyue"></use>
-                                </svg>
-                                <span>余额 {{ userinfo.money }}</span></ion-radio>
                         </ion-radio-group>
                     </div>
                     <div class="item">

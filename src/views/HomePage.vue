@@ -36,7 +36,7 @@ function cleartip() {
     }
 }
 function goHome(index: number) {
-    router.push('/')
+    router.push('/home-goods')
     cleartip()
     tip.value[index] = 'unifiedColor'
 }
