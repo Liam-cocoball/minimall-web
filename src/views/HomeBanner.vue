@@ -50,7 +50,7 @@ onMounted(async () => {
 })
 
 function goGoodsList(id: number) {
-  router.push(`/home/goods-list/${id}`)
+  router.push(`/goods-list/${id}`)
 }
 
 </script>

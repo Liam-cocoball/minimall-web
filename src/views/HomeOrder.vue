@@ -36,7 +36,10 @@
                <div class="info">
                   <div>{{ item.goods.name + '-' + item.goods.title }}</div>
                   <div>{{ item.sku.join(',') }}</div>
-                  <div>x <span style="margin: 0px 5px 0px 10px;">{{ item.count }}</span></div>
+                  <div>
+                  <span :class="item.state ===1?'orderstategreen':'orderstatered'">{{ orderstate(item.state) }}</span>
+                  <span style="margin: 0px 5px 0px 10px;">x{{ item.count }}</span>
+               </div>
                </div>
             </div>
          </div>
@@ -55,7 +58,10 @@
             <div class="info">
                <div>{{ cuurentOrder.goods.name + '-' + cuurentOrder.goods.title }}</div>
                <div>{{ cuurentOrder.sku.join(',') }}</div>
-               <div>x <span style="margin: 0px 5px 0px 10px;">{{ cuurentOrder.count }}</span></div>
+               <div>
+                  <span :class="cuurentOrder.state ===1?'orderstategreen':'orderstatered'">{{ orderstate(cuurentOrder.state) }}</span>
+                  <span style="margin: 0px 5px 0px 10px;">x{{ cuurentOrder.count }}</span>
+               </div>
             </div>
          </div>
          <div class="orderinfo">
@@ -200,6 +206,9 @@ function getPlayFunc(item: number): string {
    return playFunc
 }
 
+function orderstate(state: number):string {
+   return state === 1 ? '已付款' : '未付款'
+}
 
 
 </script>
@@ -240,12 +249,19 @@ img {
 
 .ordergoods .info div:nth-child(3) {
    text-align: right;
-   font-size: 18px;
 }
 
 .orderinfo div {
    display: flex;
    justify-content: space-between;
    margin: 5px 0px 5px 0px;
+}
+
+.orderstatered {
+   color: red;
+}
+
+.orderstategreen {
+   color: green;
 }
 </style>
